@@ -284,6 +284,43 @@ Método CalcularConsumo():
 ```
 Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
 Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
+
+**Resultado para a questão:**
+```javascript
+class Veiculo {
+    constructor(modelo, ano) {
+        this.modelo = modelo;
+        this.ano = ano;
+    }
+}
+
+class Carro extends Veiculo {
+    constructor(modelo, ano, eficiencia) {
+        super(modelo, ano);
+        this.eficiencia = eficiencia;
+    }
+
+    calcularConsumo() {
+        return this.eficiencia > 0 ? this.eficiencia : Infinity; // se a eficiencia for maior que 0, retorna a eficiencia, senão retorna infinito
+    }
+}
+
+class Moto extends Veiculo {
+    constructor(modelo, ano, eficiencia) {
+        super(modelo, ano);
+        this.eficiencia = eficiencia;
+    }
+
+    calcularConsumo() {
+        return this.eficiencia > 0 ? this.eficiencia : Infinity; // se a eficiencia for maior que 0, retorna a eficiencia, senão retorna infinito
+    }
+}
+let carro = new Carro('Ferrari 458', 2024, 5.5);
+let moto = new Moto('Honda CB 1000', 2021, 3.5); 
+
+console.log("O consumo da ferrari é: " + carro.calcularConsumo().toFixed(2) + " Km/l");
+console.log("O consumo da cb1000 é: " + moto.calcularConsumo().toFixed(2) + " Km/l");
+```
 ______
 
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.
@@ -297,6 +334,29 @@ Considere a fórumla de atualização velocidade:
     velocidade = velocidadeInicial - desaceleracao * tempo
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
+
+**Resultado para a questão:**
+```javascript
+let velocidadeInicial = 1000;
+let desaceleracao = 100;
+let tempoMaximo = 10;
+let tempoMinimo = 5;
+let velocidadeSegura = 100; 
+let tempo = 0;
+
+for (tempo = 0; tempo <= tempoMaximo; tempo++) {
+    let velocidade = velocidadeInicial - desaceleracao * tempo;
+    
+    if (velocidade <= velocidadeSegura) { 
+        break; 
+    }
+}
+
+if (tempo < tempoMinimo) {
+    tempo = tempoMinimo;
+}
+console.log(`Tempo necessário para a sonda atingir uma velocidade segura de pouso: ${tempo.toFixed(2)} segundos`);
+```
 ______
 
 **10)** Em um sistema de análise financeira, as operações de investimento de uma empresa podem ser representadas por matrizes, onde cada linha representa um tipo de investimento e cada coluna representa um período de tempo.
