@@ -292,16 +292,19 @@ class Veiculo {
         this.modelo = modelo;
         this.ano = ano;
     }
+    calcularConsumo() {
+          return 0;
+       }
 }
 
 class Carro extends Veiculo {
     constructor(modelo, ano, eficiencia) {
         super(modelo, ano);
-        this.eficiencia = eficiencia;
+        this.eficiencia = eficiencia; 
     }
 
-    calcularConsumo() {
-        return this.eficiencia > 0 ? this.eficiencia : Infinity; // se a eficiencia for maior que 0, retorna a eficiencia, senão retorna infinito
+    calcularConsumo(distancia) {
+        return distancia / this.eficiencia; 
     }
 }
 
@@ -311,15 +314,18 @@ class Moto extends Veiculo {
         this.eficiencia = eficiencia;
     }
 
-    calcularConsumo() {
-        return this.eficiencia > 0 ? this.eficiencia : Infinity; // se a eficiencia for maior que 0, retorna a eficiencia, senão retorna infinito
+    calcularConsumo(distancia) {
+        return distancia / this.eficiencia;
     }
 }
-let carro = new Carro('Ferrari 458', 2024, 5.5);
-let moto = new Moto('Honda CB 1000', 2021, 3.5); 
 
-console.log("O consumo da ferrari é: " + carro.calcularConsumo().toFixed(2) + " Km/l");
-console.log("O consumo da cb1000 é: " + moto.calcularConsumo().toFixed(2) + " Km/l");
+const carro = new Carro("Civic", 2020, 15); 
+console.log('O consumo do carro em km/l foi de: ' + carro.calcularConsumo(150)); 
+
+const moto = new Moto("CB1000", 2021, 30); 
+console.log('O consumo da moto em km/l foi de: ' + moto.calcularConsumo(150)); 
+
+
 ```
 ______
 
@@ -389,3 +395,35 @@ Escrever("Total de investimentos acumulados:")
 ImprimirMatriz(totalInvestimentos)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
+
+**Resultado para a questão:**
+```javascript
+function multiplicarMatrizesInvestimento(matrizA, matrizB) {
+    if (matrizA[0].length !== matrizB.length) {
+        return "As matrizes não podem ser multiplicadas. Dimensões incompatíveis.";
+    }
+    
+    let linhasA = matrizA.length;
+    let colunasA = matrizA[0].length;
+    let colunasB = matrizB[0].length;
+    
+    let matrizResultado = Array.from({ length: linhasA }, () => Array(colunasB).fill(0));
+    
+    for (let i = 0; i < linhasA; i++) {
+        for (let j = 0; j < colunasB; j++) {
+            for (let k = 0; k < colunasA; k++) {
+                matrizResultado[i][j] += matrizA[i][k] * matrizB[k][j];
+            }
+        }
+    }
+    
+    return matrizResultado;
+}
+
+let a = [[1000, 2000], [1500, 2500]];
+let b = [[1.1, 0.9], [1.2, 1.3]];
+
+let resultado = multiplicarMatrizesInvestimento(a, b);
+console.log("Resultado da multiplicação das matrizes de investimento:");
+console.log(resultado);
+```
